@@ -3,7 +3,6 @@
 }
 
 body {
-  padding: 20px;
   font-family: Arial, Helvetica, sans-serif;
   background: #27292c;
   color: white;
@@ -18,20 +17,23 @@ h1 {
   align-items: center;
   justify-content: space-between;
 }
-
+nav{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #282c34;
+}
 .nav-list {
   list-style: none;
   display: flex;
 }
 
 .nav-list-item {
-  margin-left: 10px;
   font-size: 1.1rem;
 }
 .nav-bar {
   display: flex;
   align-items: center;
-  padding: 10px;
   background-color: #282c34;
 }
 
