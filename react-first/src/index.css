@@ -29,7 +29,7 @@ nav{
 }
 
 .nav-list-item {
-  font-size: 1.1rem;
+  font-size: 1.9rem;
 }
 .nav-bar {
   display: flex;
@@ -43,7 +43,26 @@ nav{
 }
 
 .title {
-  font-size: 20px;
+  font-size: 30px;
   color: #61dafb;
   font-weight: bold;
+}
+
+.factlist{
+  margin-top: 46px;
+  max-width: 400px;
+}
+.factlist>li{
+  margin-block: 10px;
+  line-height: 19px;
+}
+.factlist>li::marker{
+  color: #61dafb;
+  font-size:1.5rem;
+}
+body{
+  background-image: url(C:\Users\DELL\Desktop\React\react-first\src\components\react.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 15%;
 }

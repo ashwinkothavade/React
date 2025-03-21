@@ -6,7 +6,7 @@ function MainContent() {
                 <h1>
                     Welcome to React
                 </h1>
-                <ul>    
+                <ul className="factlist">    
                     <li>Declarative</li>
                     <li>Component-Based</li>
                     <li>Learn Once, Write Anywhere</li>
