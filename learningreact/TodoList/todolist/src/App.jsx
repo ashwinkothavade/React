@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [todolist, setTodolist] = useState([]);
+  const [newtask, setNewTask] = useState("");
+
+  const handleChange = (event) => {
+    setNewTask(event.target.value);
+  };
+
+  const addTask = () => {
+    if (newtask.trim() === "") return; // Prevent adding empty tasks
+
+    const task = {
+      id: todolist.length === 0 ? 1 : todolist[todolist.length - 1].id + 1,
+      taskname: newtask,
+    };
+
+    setTodolist([...todolist, task]);
+    setNewTask(""); // Clear input after adding task
+  };
+
+  const deleteTask = (id) => {
+    setTodolist(todolist.filter((task) => task.id !== id));
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="App">
+      <div className="addtask">
+        <input type="text" onChange={handleChange} value={newtask} />
+        <button onClick={addTask}>Add Task</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className="list">
+        {todolist.map((task) => (
+          <div key={task.id}>
+            <h1>{task.taskname}</h1>
+            <button onClick={() => deleteTask(task.id)}>-</button>
+          </div>
+        ))}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
