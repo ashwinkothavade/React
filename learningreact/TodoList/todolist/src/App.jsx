@@ -1,43 +1,58 @@
-import { useState } from "react";
 import "./App.css";
+import { useState } from "react";
+import { Task } from "./Task.jsx";
 
 function App() {
-  const [todolist, setTodolist] = useState([]);
-  const [newtask, setNewTask] = useState("");
+  const [todoList, setTodoList] = useState([]);
+  const [newTask, setNewTask] = useState("");
 
   const handleChange = (event) => {
     setNewTask(event.target.value);
   };
 
   const addTask = () => {
-    if (newtask.trim() === "") return; // Prevent adding empty tasks
-
     const task = {
-      id: todolist.length === 0 ? 1 : todolist[todolist.length - 1].id + 1,
-      taskname: newtask,
+      id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+      taskName: newTask,
+      completed: false,
     };
-
-    setTodolist([...todolist, task]);
-    setNewTask(""); // Clear input after adding task
+    setTodoList(task.taskName !== "" ? [...todoList, task] : todoList);
   };
 
   const deleteTask = (id) => {
-    setTodolist(todolist.filter((task) => task.id !== id));
+    setTodoList(todoList.filter((task) => task.id !== id));
+  };
+
+  const completeTask = (id) => {
+    setTodoList(
+      todoList.map((task) => {
+        if (task.id === id) {
+          return { ...task, completed: true };
+        } else {
+          return task;
+        }
+      })
+    );
   };
 
   return (
     <div className="App">
-      <div className="addtask">
-        <input type="text" onChange={handleChange} value={newtask} />
-        <button onClick={addTask}>Add Task</button>
+      <div className="addTask">
+        <input onChange={handleChange} />
+        <button onClick={addTask}> Add Task</button>
       </div>
       <div className="list">
-        {todolist.map((task) => (
-          <div key={task.id}>
-            <h1>{task.taskname}</h1>
-            <button onClick={() => deleteTask(task.id)}>-</button>
-          </div>
-        ))}
+        {todoList.map((task) => {
+          return (
+            <Task
+              taskName={task.taskName}
+              id={task.id}
+              completed={task.completed}
+              deleteTask={deleteTask}
+              completeTask={completeTask}
+            />
+          );
+        })}
       </div>
     </div>
   );
